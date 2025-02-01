@@ -1,0 +1,11 @@
+# Ignore compiled files
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+*.class
+*.pyc
+*.pyo
+*.jar
