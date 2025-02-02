@@ -1,4 +1,3 @@
-package AoC;
 
 import java.io.*;
 import java.util.*;
