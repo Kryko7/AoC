@@ -76,16 +76,42 @@ fn solve_equation(equation: &[i64], target: i64, index: usize, curr_sum: i64) ->
         return true;
     }
     false
+
+}
+
+fn solve_equation2(equation: &[i64], target: i64, index: usize, curr_sum: i64) -> bool {
+    if index == equation.len() {
+        return target == curr_sum;
+    }
+    if solve_equation2(equation, target, index + 1, curr_sum + equation[index]) {
+        return true;
+    }
+    if solve_equation2(equation, target, index + 1, curr_sum * equation[index]) {
+        return true;
+    }
+    let a = curr_sum.to_string();
+    let b = equation[index].to_string();
+
+    let concatanated = format!("{}{}", a, b).parse::<i64>().unwrap();
+    if solve_equation2(equation, target, index + 1, concatanated) {
+        return true;
+    }
+    false
 }
 
 fn main() {
     let equations = parse_file("AoC2024_7.txt");
     // println!("{:?}", equations);
     let mut total: i64 = 0;
+    let mut total2: i64 = 0;
     for equation in equations {
         if solve_equation(&equation.equation, equation.target, 1, equation.equation[0]) {
             total += equation.target;
         }
+        if solve_equation2(&equation.equation, equation.target, 1, equation.equation[0]) {
+            total2 += equation.target;
+        }
     }
     println!("Total: {}", total);
+    println!("Total2: {}", total2);
 }

@@ -66,14 +66,44 @@ func solveEquation(equation []uint64, index int, target uint64, currSum uint64) 
 		solveEquation(equation, index + 1, target, currSum * equation[index])
 }
 
+func solveEquation2(equation []uint64, index int, target uint64, currSum uint64) bool {
+	if (index == len(equation)) {
+		return currSum == target
+	}
+
+
+	return solveEquation2(equation, index + 1, target, currSum + equation[index]) ||
+		solveEquation2(equation, index + 1, target, currSum * equation[index]) ||
+		solveEquation2(equation, index + 1, target, concatanateIntegers(currSum, equation[index]))
+
+}
+
+
+func concatanateIntegers(a, b uint64) uint64 {
+	aStr := strconv.FormatUint(a, 10)
+	bStr := strconv.FormatUint(b, 10)
+
+	concatenatedStr := aStr + bStr
+	concatenatedInt, err := strconv.ParseInt(concatenatedStr, 10, 64)
+	if err != nil {
+		log.Fatalf("Failed to concatenate integers: %v", err)
+	}
+	return uint64(concatenatedInt)
+}
+
 func main() {
 	fmt.Println("Hello, playground.")
 	equations := parseFile("AoC2024_7.txt")
 	var total uint64 = 0
+	var total2 uint64 = 0
 	for _, equation := range equations {
 		if solveEquation(equation.equation, 0, equation.target, 0) {
 			total += equation.target
 		}
+		if solveEquation2(equation.equation, 0, equation.target, 0) {
+			total2 += equation.target
+		}
 	} 
 	fmt.Println("Total: ", total)
+	fmt.Println("Total2: ", total2)
 }
