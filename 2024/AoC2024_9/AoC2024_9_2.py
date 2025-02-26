@@ -1,5 +1,3 @@
-
-
 def parsing(file_path):
     with open(file_path, 'r') as f:
         return f.read().strip()
@@ -10,14 +8,13 @@ def mapping(diskmap):
     spaces = []
     contains = {}
     for i in range(len(diskmap)):
+        n = int(diskmap[i])
         if i % 2 == 0:
-            n = int(diskmap[i])
             for j in range(n):
                 res.append(index)
             contains[index] = [n, len(res)-n, len(res)-1]
             index += 1
         else:
-            n = int(diskmap[i])
             for j in range(n):
                 res.append(-1)
             spaces.append([n, len(res)-n, len(res)-1])
