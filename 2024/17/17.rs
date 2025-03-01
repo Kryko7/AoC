@@ -60,7 +60,7 @@ impl Puzzle {
     }
 
     fn bxc(&mut self) {
-        self.reg_b = self.reg_b ^ self.reg_a;
+        self.reg_b = self.reg_b ^ self.reg_c;
     }
 
     fn out(&mut self, c_operand: u32) {
