@@ -1,2 +1,4 @@
 aoc
 *.txt
+*.class
+rust_proj
